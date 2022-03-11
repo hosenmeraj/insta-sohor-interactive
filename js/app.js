@@ -1,4 +1,4 @@
-let posts=[ ];
+let posts=[];
 
 const likedPostsId = [];
 const reportedPostsId = [];
@@ -51,7 +51,10 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
+  // console.log(post)
     const image = post.image;
+    const comment = post.comments[0];
+    console.log(comment.user)
     const div = document.createElement( "article" );
     div.classList.add( "post" );
     div.innerHTML = `
@@ -62,7 +65,7 @@ const createPost = (post) => {
                     target="_blank"
                     class="post__avatar"
                   >
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Phero"  />
+                    <img src="${post.userImage}"  />
                   </a>
                   <a href="#" class="post__user">phero</a>
                 </div>
@@ -120,9 +123,9 @@ const createPost = (post) => {
                   <div class="post__description">
                     <small>
                       <a class="post__name--underline" href="#">
-                          ${post.comments?.user}
+                          ${comment.user}
                       </a>
-                      ${post.comments?.text}
+                      ${comment.text}
                     </small>
                   </div>
                   <span class="post__date-time">30 minutes ago</span>
@@ -133,6 +136,7 @@ const createPost = (post) => {
 };
 
 const showPosts = (posts) => {
+  console.log(posts);
     const productsContainer = document.getElementById( "posts" );
     productsContainer.innerHTML = "";
     posts.forEach((post) => {
@@ -142,7 +146,8 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
-    const likedPosts = getLikedPosts();
+  document.getElementById( "liked" ).innerHTML='';
+    const likedPosts = getLikedPosts(); 
     likedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "liked" ).appendChild(div);
