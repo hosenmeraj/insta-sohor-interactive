@@ -1,6 +1,7 @@
 let posts=[];
 
 const likedPostsId = [];
+console.log(likedPostsId.length)
 const reportedPostsId = [];
 
 const getLikedPosts = () => {
@@ -16,6 +17,7 @@ const isLiked = (id) => {
 };
 
 const addToLiked = (id) => {
+  console.log(id);
     likedPostsId.push(id); 
     showPosts(posts);
 };
@@ -54,7 +56,7 @@ const createPost = (post) => {
   // console.log(post)
     const image = post.image;
     const comment = post.comments[0];
-    console.log(comment.user)
+    // console.log(comment.user)
     const div = document.createElement( "article" );
     div.classList.add( "post" );
     div.innerHTML = `
@@ -136,7 +138,7 @@ const createPost = (post) => {
 };
 
 const showPosts = (posts) => {
-  console.log(posts);
+  // console.log(posts);
     const productsContainer = document.getElementById( "posts" );
     productsContainer.innerHTML = "";
     posts.forEach((post) => {
@@ -146,11 +148,11 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
-  document.getElementById( "liked" ).innerHTML='';
     const likedPosts = getLikedPosts(); 
+    document.getElementById( "liked" ).textContent='';
     likedPosts.forEach((post) => {
         const div = createPost(post);
-        document.getElementById( "liked" ).appendChild(div);
+        document.getElementById("liked").appendChild(div);
     });
 };
 
